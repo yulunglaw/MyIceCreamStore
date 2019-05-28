@@ -22,7 +22,7 @@ public class Menu extends JFrame {
 	private ArrayList<IceCream> cartList;
 
 	/**
-	 * Constructor
+	 * Constructor to create the menu JFrame
 	 */
 	public Menu() {
 		super("Main Menu");
@@ -32,7 +32,7 @@ public class Menu extends JFrame {
 
 		PriceMapping pm = new PriceMapping();
 		cartList = new ArrayList<>();
-		
+
 		/**
 		 * Upper Panel Section
 		 */
@@ -47,7 +47,7 @@ public class Menu extends JFrame {
 			flavorPanel.add(rb, BorderLayout.SOUTH);
 
 		}
-		
+
 		/**
 		 * Center Panel Section
 		 */
@@ -105,26 +105,21 @@ public class Menu extends JFrame {
 			}
 		});
 		BottomPanel.add(addToCartButton, BorderLayout.NORTH);
-		
+
 		JButton finishButton = new JButton("Finish Order");
 		finishButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}
 		});
 		BottomPanel.add(finishButton, BorderLayout.CENTER);
-		
+
 		add(BottomPanel, BorderLayout.SOUTH);
 	}
 
 	public ArrayList<IceCream> getCartList() {
 		return cartList;
-	}
-	
-	public static void main(String[] args) {
-		Menu m = new Menu();
-		System.out.println(m.getCartList().isEmpty());
 	}
 }

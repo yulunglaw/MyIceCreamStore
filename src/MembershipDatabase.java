@@ -104,6 +104,12 @@ public class MembershipDatabase {
 		}
 	}
 
+	/**
+	 * This function will read from the database file and return and store all the
+	 * names and password combo as a HashMap
+	 * 
+	 * @return
+	 */
 	public HashMap<String, String> credentialCheck() {
 		try {
 			Scanner s = new Scanner(f);
@@ -127,10 +133,5 @@ public class MembershipDatabase {
 
 	public boolean isSuccessfullyregistered() {
 		return successfullyregistered;
-	}
-
-	public static void main(String[] args) {
-		MembershipDatabase md = new MembershipDatabase();
-		System.out.println(md.credentialCheck());
 	}
 }

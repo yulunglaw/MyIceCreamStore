@@ -54,29 +54,38 @@ public class Cart extends JFrame {
 				JPanel panel = new JPanel();
 				panel.setLayout(new GridLayout(4, 0));
 
+				// Ask to input name here
 				JLabel label = new JLabel("Please enter your name here:");
 				JTextField inputField = new JTextField(20);
 				inputField.addActionListener(new ActionListener() {
-					
+
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						inputName = inputField.getText();
 					}
 				});
-				
+
+				// Ask to input password here
 				JLabel label2 = new JLabel("Please enter your password here:");
 				JTextField inputField2 = new JTextField(20);
 				inputField2.addActionListener(new ActionListener() {
-					
+
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						inputPassword = inputField2.getText();
 					}
 				});
-				
+
+				/**
+				 * This section will be responsible for the "log In" button. Once both name and
+				 * password were entered, It will first check if the name already exists in the
+				 * database. If not, will prompt the user the name is not a registered member.
+				 * If name already exists, will check if password matches, if yes, 10% discount
+				 * will applied to the cart. New discounted price will be shown in the cart.
+				 */
 				JButton logInButton = new JButton("Log In");
 				logInButton.addActionListener(new ActionListener() {
-					
+
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						MembershipDatabase md = new MembershipDatabase();
@@ -86,47 +95,25 @@ public class Cart extends JFrame {
 								if (inputPassword.equals(credentialMap.get(inputName))) {
 									bottomPanel.remove(finalPriceLabel);
 									finalPrice = finalPrice * 0.9;
-									new PopUpInfo("Welcome back, " + inputName + " we applied 10% off your total price!");
+									new PopUpInfo(
+											"Welcome back, " + inputName + " we applied 10% off your total price!");
 									memberLogInForm.dispose();
 									finalPriceLabel = new JLabel("Member discounted Amount (10% off): $" + finalPrice);
 									bottomPanel.add(finalPriceLabel);
 									bottomPanel.revalidate();
 									bottomPanel.repaint();
-								}
-								else {
+								} else {
 									new PopUpInfo("Sorry, invalid password. Please try again");
 								}
 							} catch (NullPointerException e2) {
 								new PopUpInfo("Please enter both your name and password");
 							}
-						}
-						else {
+						} else {
 							new PopUpInfo("Sorry, you are not a memeber of us yet.");
 						}
 					}
 				});
-				
-//				logInButton.addActionListener(new ActionListener() {
-//
-//					@Override
-//					public void actionPerformed(ActionEvent e) {
-//						String inputInfo = inputField.getText();
-//						if ("yo".equals(inputInfo)) { // let's assume it means not in database here for now
-//							new PopUpInfo("Sorry, you are not a memeber of us");
-//						} else {
-//							// Replace the old final price display with a new one
-//							bottomPanel.remove(finalPriceLabel);
-//							finalPrice = finalPrice * 0.9;
-//							new PopUpInfo("Welcome back, we applied 10% off your total price!");
-//							memberLogInForm.dispose();
-//							finalPriceLabel = new JLabel("Total Amount: " + finalPrice);
-//							bottomPanel.add(finalPriceLabel);
-//							bottomPanel.revalidate();
-//							bottomPanel.repaint();
-//						}
-//					}
-//				});
-				
+
 				panel.add(label);
 				panel.add(inputField);
 				panel.add(label2);

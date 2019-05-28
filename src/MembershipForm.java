@@ -35,7 +35,7 @@ public class MembershipForm extends JFrame {
 		JTextField tf1 = new JTextField(20);
 		JLabel inputPassword = new JLabel("Please enter your password: ");
 		JTextField tf2 = new JTextField(20);
-		JButton button = new JButton("ENTER");
+		JButton enterButton = new JButton("ENTER");
 
 		inputPanel.setLayout(new GridLayout(4, 0));
 		inputPanel.add(inputName);
@@ -45,11 +45,11 @@ public class MembershipForm extends JFrame {
 		add(inputPanel, BorderLayout.CENTER);
 
 		bottomPanel = new JPanel();
-		bottomPanel.add(button);
+		bottomPanel.add(enterButton);
 		add(bottomPanel, BorderLayout.SOUTH);
 
 		// Add action listener to the JButton
-		button.addActionListener(new ActionListener() {
+		enterButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -65,10 +65,5 @@ public class MembershipForm extends JFrame {
 				}
 			}
 		});
-
-	}
-
-	public static void main(String[] args) {
-		new MembershipForm();
 	}
 }
