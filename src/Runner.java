@@ -58,7 +58,7 @@ public class Runner extends JFrame {
 				// if NullPointerException, that means myMenu was not initialized and order
 				// button was not pressed and cart must be empty
 				catch (NullPointerException e2) {
-					new PopUpInfo("You cart is empty"); 
+					new PopUpInfo("You cart is empty");
 				}
 			}
 		});
@@ -79,7 +79,6 @@ public class Runner extends JFrame {
 		add(welcomeLabel, BorderLayout.NORTH);
 		add(middlePanel, BorderLayout.CENTER);
 		add(closeButton, BorderLayout.SOUTH);
-
 	}
 
 	public static void main(String[] args) {

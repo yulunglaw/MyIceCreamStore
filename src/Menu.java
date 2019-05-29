@@ -45,7 +45,6 @@ public class Menu extends JFrame {
 			JRadioButton rb = new JRadioButton(flavor);
 			flavorButtonGroup.add(rb);
 			flavorPanel.add(rb, BorderLayout.SOUTH);
-
 		}
 
 		/**
@@ -60,7 +59,6 @@ public class Menu extends JFrame {
 			JRadioButton rb = new JRadioButton(topping);
 			toppingButtonGroup.add(rb);
 			toppingPanel.add(rb, BorderLayout.SOUTH);
-
 		}
 		add(flavorPanel, BorderLayout.NORTH);
 		add(toppingPanel, BorderLayout.CENTER);
@@ -83,7 +81,6 @@ public class Menu extends JFrame {
 					if (button.isSelected()) {
 						selectedFlavor = button.getText();
 						flavorPrice = pm.getFlavorMapping().get(selectedFlavor);
-
 					}
 				}
 				// React to the selection of chosen topping
@@ -100,8 +97,6 @@ public class Menu extends JFrame {
 				IceCream ic = new IceCream(selectedFlavor, flavorPrice, selectedTopping, toppingPrice);
 				cartList.add(ic);
 				new PopUpInfo("Your item succussfully added to your cart.");
-				// close the JFrame after this JButton is clicked
-//				dispose();
 			}
 		});
 		BottomPanel.add(addToCartButton, BorderLayout.NORTH);

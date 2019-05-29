@@ -21,6 +21,7 @@ public class Cart extends JFrame {
 	private JPanel bottomPanel;
 	private String inputName;
 	private String inputPassword;
+	private boolean discountApplied = false;
 
 	public Cart(ArrayList<IceCream> cartList) {
 		super("View your Cart");
@@ -46,6 +47,10 @@ public class Cart extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				// Check if discount already applied before
+				if (discountApplied) {
+					new PopUpInfo("Discount already applied.");
+				} else {
 				JFrame memberLogInForm = new JFrame();
 				memberLogInForm.setVisible(true);
 				memberLogInForm.setSize(300, 200);
@@ -102,6 +107,7 @@ public class Cart extends JFrame {
 									bottomPanel.add(finalPriceLabel);
 									bottomPanel.revalidate();
 									bottomPanel.repaint();
+									discountApplied = true;
 								} else {
 									new PopUpInfo("Sorry, invalid password. Please try again");
 								}
@@ -121,7 +127,7 @@ public class Cart extends JFrame {
 				add(panel);
 				memberLogInForm.add(panel, BorderLayout.NORTH);
 				memberLogInForm.add(logInButton, BorderLayout.SOUTH);
-
+				}
 			}
 		});
 		middlePanel.add(memberLogIn);
@@ -132,5 +138,4 @@ public class Cart extends JFrame {
 		bottomPanel.add(finalPriceLabel);
 		add(bottomPanel, BorderLayout.SOUTH);
 	}
-
 }
