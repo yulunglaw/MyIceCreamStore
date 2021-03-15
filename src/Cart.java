@@ -11,6 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 public class Cart extends JFrame {
 
@@ -22,6 +24,8 @@ public class Cart extends JFrame {
 	private String inputName;
 	private String inputPassword;
 	private boolean discountApplied = false;
+	private StringBuilder usernameBuilder;
+	private StringBuilder passwordBuilder;
 
 	public Cart(ArrayList<IceCream> cartList) {
 		super("View your Cart");
@@ -62,22 +66,51 @@ public class Cart extends JFrame {
 				// Ask to input name here
 				JLabel label = new JLabel("Please enter your name here:");
 				JTextField inputField = new JTextField(20);
-				inputField.addActionListener(new ActionListener() {
 
+				// add document listener to listen to what user type in as user name
+				// we don't use actionListener as user must press "Enter" key to have username recongized
+				inputField.getDocument().addDocumentListener(new DocumentListener() {
+					
 					@Override
-					public void actionPerformed(ActionEvent e) {
-						inputName = inputField.getText();
+					public void removeUpdate(DocumentEvent e) {
+						usernameBuilder = new StringBuilder();
+						usernameBuilder.append(inputField.getText());
+					}
+					
+					@Override
+					public void insertUpdate(DocumentEvent e) {
+						usernameBuilder = new StringBuilder();
+						usernameBuilder.append(inputField.getText());
+					}
+					
+					@Override
+					public void changedUpdate(DocumentEvent e) {
+						// TODO Auto-generated method stub
+						System.out.println("There's a update!!!");
 					}
 				});
 
 				// Ask to input password here
 				JLabel label2 = new JLabel("Please enter your password here:");
 				JTextField inputField2 = new JTextField(20);
-				inputField2.addActionListener(new ActionListener() {
-
+				inputField2.getDocument().addDocumentListener(new DocumentListener() {
+					
 					@Override
-					public void actionPerformed(ActionEvent e) {
-						inputPassword = inputField2.getText();
+					public void removeUpdate(DocumentEvent e) {
+						passwordBuilder = new StringBuilder();
+						passwordBuilder.append(inputField2.getText());
+					}
+					
+					@Override
+					public void insertUpdate(DocumentEvent e) {
+						passwordBuilder = new StringBuilder();
+						passwordBuilder.append(inputField2.getText());
+					}
+					
+					@Override
+					public void changedUpdate(DocumentEvent e) {
+						// TODO Auto-generated method stub
+						System.out.println("There's a update!!!");
 					}
 				});
 
@@ -95,6 +128,8 @@ public class Cart extends JFrame {
 					public void actionPerformed(ActionEvent e) {
 						MembershipDatabase md = new MembershipDatabase();
 						HashMap<String, String> credentialMap = md.credentialCheck();
+						inputName = usernameBuilder.toString();
+						inputPassword = passwordBuilder.toString();
 						if (credentialMap.containsKey(inputName)) {
 							try {
 								if (inputPassword.equals(credentialMap.get(inputName))) {
